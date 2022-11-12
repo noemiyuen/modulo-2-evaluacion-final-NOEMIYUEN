@@ -1,0 +1,46 @@
+.header{
+    height: 200px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $color_primary;
+    &__form {
+        position:relative;
+        top: 100px;
+        height: 50px;
+        width: 90%;
+        padding:10px;
+        background-color:$color_secundary;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        gap:10px;
+         /*shadow : pxX pxY  blur color/opacidad20% */
+         box-shadow: 0 1px 10px  rgba(0, 0, 0, 0.20);
+        @media all and (min-width: 768px){
+            padding:40px 10px;  
+            gap:20px;
+        }
+        &--input{
+            padding: 3px;
+            width:80%;
+            @include t(rem(14),rem(16));
+            border:1px solid $color_primary;
+            @media all and (min-width: 768px){
+                width:80%;
+                @include t(rem(18),rem(20));  
+            }
+        }
+        &--label{
+            background-color: $color_primary;
+            color:$color_secundary;
+            @include t(rem(16),rem(20));
+            padding:3px;
+            @media all and (min-width: 768px){
+                padding:5px;
+                @include t(rem(20),rem(24)); 
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.main {
+    height: 90%;
+    padding: 50px 5px 5px 10px;
+    display:flex;
+    justify-content: center;
+    gap:10px;
+    @media all and (min-width: 768px){
+        padding: 100px 20px 10px 20px;  
+        gap:20px;
+    }
+    .section {
+        padding:3px;
+        border:solid 2px $color_primary;
+        display:flex;
+        justify-content: center;
+        color:$color_primary;
+        font-weight: 600;
+    }
+}
