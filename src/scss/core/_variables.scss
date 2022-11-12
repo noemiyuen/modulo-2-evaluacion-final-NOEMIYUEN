@@ -4,12 +4,21 @@ $defaultFontSize:16;
     @return ($pixels/$defaultFontSize*1rem);
 }
 
+
+// colors
+$color_primary:rgb(222, 114, 26);
+$color_secundary:white; 
+
+
 //Mixins
 @mixin t($fontSize,$fontHeight) {
     font-size: $fontSize;
     line-height: $fontHeight;
 }
 
-// colors
-$color_primary:rgb(222, 114, 26);
-$color_secundary:white; 
+@mixin flex($direction,$justify,$align){
+    display:flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}

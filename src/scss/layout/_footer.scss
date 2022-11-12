@@ -4,9 +4,7 @@
     background-color:$color_primary;
     &__copy {
         padding:3px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex(row, center, center);
         @include t(rem(12),rem(14));
     }
 }

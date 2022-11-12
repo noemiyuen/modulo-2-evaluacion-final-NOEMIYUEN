@@ -1,19 +1,84 @@
 .main {
-    height: 90%;
     padding: 50px 5px 5px 10px;
-    display:flex;
-    justify-content: center;
+    @include flex('', center, '');
     gap:10px;
     @media all and (min-width: 768px){
         padding: 100px 20px 10px 20px;  
         gap:20px;
-    }
+        }
     .section {
         padding:3px;
         border:solid 2px $color_primary;
-        display:flex;
-        justify-content: center;
         color:$color_primary;
         font-weight: 600;
+        gap:10px;
+        &__title{
+            width: 100%;
+            text-align: center;
+        }
+        &__list{
+            height: 100%;
+            width:100%;
+            text-decoration: none;
+            list-style: none;
+            @include flex(row, center, flex-start);
+            flex-wrap: wrap;
+            gap: 3px;
+            &--element {
+                padding:3px;
+                width: 180px;
+                list-style: none;
+                flex-wrap: wrap;  
+                }
+            }
+        }
     }
+
+.article {
+    width: 100%;
+    @include flex(column, center, center);
+    padding: 5px;
+    @include t(rem(14),rem(16));
+    color:black;
+     /*shadow : pxX pxY  blur color/opacidad20% */
+     box-shadow: 0 1px 10px  rgba(0, 0, 0, 0.20);
+    &__imgBox {
+        height: 200px;
+        max-width: 150px;
+        &--img{
+            width: 100%;
+            height: 100%;
+            }
+        }
+    &__name {
+        font-weight: 600;
+        @include t(rem(14),rem(16));
+        }
+    &__status {
+        @include t(rem(14),rem(16));
+        }
+    }
+
+.characters {
+    width:60%;
+    @include flex(column, '', '');
+    padding:3px;
+    border:solid 2px $color_primary;
+    @include flex('', center, '');
+    color:$color_primary;
+    font-weight: 600;
+    gap:10px;
+    }
+.favorite {
+    width:30%;
+    @include flex(column, flex-start,flex-start);
+    padding:3px;
+    border:solid 2px $color_primary;
+    @include flex('', center, '');
+    color:$color_primary;
+    font-weight: 600;
+    gap:10px;
+    }
+.selected {
+    background-color: rgba(241, 156, 44, 0.561);
 }
