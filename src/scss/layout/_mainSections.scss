@@ -1,66 +1,86 @@
 .main {
-    padding: 50px 5px 5px 10px;
+    padding: 30px 5px 5px 5px;
     @include flex('', center, '');
-    gap:10px;
+    gap:3px;
     @media all and (min-width: 768px){
-        padding: 100px 20px 10px 20px;  
-        gap:20px;
+        padding: 100px 30px 20px 30px;  
+        gap:10px;
         }
     .section {
-        padding:3px;
         border:solid 2px $color_primary;
         color:$color_primary;
+        @include flex(column, flex-start, center);
         font-weight: 600;
-        gap:10px;
+        @include t(rem(14),rem(16));
+        @media all and (min-width: 768px){
+            @include t(rem(18),rem(20));
+            padding: 10px 3px;  
+            gap:20px;
+            }
         &__title{
             width: 100%;
             text-align: center;
         }
         &__list{
-            height: 100%;
             width:100%;
             text-decoration: none;
             list-style: none;
             @include flex(row, center, flex-start);
             flex-wrap: wrap;
-            gap: 3px;
             &--element {
+                @include flex('', center, center,);
                 padding:3px;
-                width: 180px;
+                width: 90px;
                 list-style: none;
-                flex-wrap: wrap;  
+                @media all and (min-width: 768px){
+                    width: 180px;
+                    }
                 }
             }
         }
     }
 
 .article {
-    width: 100%;
+    gap:3px;
     @include flex(column, center, center);
-    padding: 5px;
+    padding: 3px;
     @include t(rem(14),rem(16));
     color:black;
      /*shadow : pxX pxY  blur color/opacidad20% */
      box-shadow: 0 1px 10px  rgba(0, 0, 0, 0.20);
-    &__imgBox {
-        height: 200px;
-        max-width: 150px;
+     @media all and (min-width: 768px){
+        width: 180px;
+        }
+     &__imgBox {
+        height: 110px;
+        max-width: 90px;
+        @media all and (min-width: 768px){
+            height: 220px;
+            max-width: 150px;
+            }
         &--img{
             width: 100%;
             height: 100%;
+            object-fit: cover;
             }
         }
     &__name {
         font-weight: 600;
-        @include t(rem(14),rem(16));
+        @include t(rem(10),rem(13));
+        @media all and (min-width: 768px){
+            @include t(rem(16),rem(20));
+            }
         }
     &__status {
-        @include t(rem(14),rem(16));
-        }
+        @include t(rem(10),rem(13));
+        @media all and (min-width: 768px){
+            @include t(rem(16),rem(20));
+            }    
+    }
     }
 
 .characters {
-    width:60%;
+    width:70%;
     @include flex(column, '', '');
     padding:3px;
     border:solid 2px $color_primary;
@@ -68,9 +88,12 @@
     color:$color_primary;
     font-weight: 600;
     gap:10px;
+    @media all and (min-width: 768px){
+        width:72%;
+        }
     }
 .favorite {
-    width:30%;
+    width:40%;
     @include flex(column, flex-start,flex-start);
     padding:3px;
     border:solid 2px $color_primary;
@@ -78,6 +101,9 @@
     color:$color_primary;
     font-weight: 600;
     gap:10px;
+    @media all and (min-width: 768px){
+        width:28%;
+        }
     }
 .selected {
     background-color: rgba(241, 156, 44, 0.561);

@@ -1,6 +1,6 @@
 'use strict';
 
-//TRAER ELEMENTOS HTML
+//Traer elementos HTML
 
 const inputElement = document.querySelector('.js-input');
 const btnSearchElement = document.querySelector('.js-btnSearch');
