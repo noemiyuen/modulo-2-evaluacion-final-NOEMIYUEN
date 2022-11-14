@@ -56,7 +56,6 @@ function renderCharacter (objetoCharacter, section){
 }
 
 //Traernos la infomación de la API
-
 function fetchCharacters (url) {
   fetch(url)
     .then((response)=>response.json())
@@ -65,6 +64,33 @@ function fetchCharacters (url) {
       renderCharacter (allCharacters,characterList);
     });
 }
+
+
+
+//comparar tarjetas en Characters y en Favorites
+/* function isInFavorite (article, renderLocalSotarge){
+  for (const favArticle of favCharacters) {
+  if (favArticle.id === article.id) {
+    article.classList.add('selected');
+  }}} */
+
+
+
+
+/* function compareFavorite(){
+  const articlesCharacters = characterList.querySelectorAll('.article');
+  const articlesFavorites = favoriteList .querySelectorAll('.article');
+
+  for (const article of articlesCharacters) {
+    const articlesInFavoritesIndex = articlesFavorites.findIndex((eachArticle) => eachArticle.id === article.id);
+    if (!articlesInFavoritesIndex === -1) {
+      article.classList.add('selected');
+      return allCharacters;}
+  }
+}
+ */
+
+
 
 //Recuperar información localStorage
 function renderLocalSotarge (){
@@ -134,4 +160,3 @@ btnSearchElement.addEventListener('click', handleClickSearch);
 const savedFavourites = JSON.parse(localStorage.getItem('favoritesStorage'));
 renderLocalSotarge ();
 btnResetFavourites.addEventListener('click', cleanFavorites);
-

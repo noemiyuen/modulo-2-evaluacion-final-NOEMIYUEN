@@ -1,9 +1,9 @@
 .main {
-    padding: 30px 5px 5px 5px;
+    padding: 40px 5px 5px 5px;
     @include flex('', center, '');
     gap:3px;
     @media all and (min-width: 768px){
-        padding: 100px 30px 20px 30px;  
+        padding: 70px 30px 20px 30px;  
         gap:10px;
         }
     .section {
@@ -108,8 +108,7 @@
         @include flex(column, center,center);
         gap:3px;
         @media all and (min-width: 768px){
-            @include flex(row, center,center);
-            width: 300px;
+            width: 250px;
             }
         &--resetBtn{
             @include flex(row, center,center);
@@ -118,13 +117,12 @@
             font-style: none;
             color:white;
             text-transform: capitalize;
-            padding:5px;
+            padding:3px;
             border-style: none;
             border: 2 solid transparent;
             border-radius: 5px;
             @media all and (min-width: 768px){
-               width: 250px;
-               padding:10px;
+               width: 150px;
                border-radius: 10px;
                @include t(rem(16),rem(18));
                 }
