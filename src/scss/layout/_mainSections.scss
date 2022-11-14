@@ -104,6 +104,32 @@
     @media all and (min-width: 768px){
         width:28%;
         }
+    &__wrap {
+        @include flex(column, center,center);
+        gap:3px;
+        @media all and (min-width: 768px){
+            @include flex(row, center,center);
+            width: 300px;
+            }
+        &--resetBtn{
+            @include flex(row, center,center);
+            @include t(rem(12),rem(13));
+            background-color: $color_primary;
+            font-style: none;
+            color:white;
+            text-transform: capitalize;
+            padding:5px;
+            border-style: none;
+            border: 2 solid transparent;
+            border-radius: 5px;
+            @media all and (min-width: 768px){
+               width: 250px;
+               padding:10px;
+               border-radius: 10px;
+               @include t(rem(16),rem(18));
+                }
+        }
+    }
     }
 .selected {
     background-color: rgba(241, 156, 44, 0.561);

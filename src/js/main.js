@@ -5,12 +5,15 @@
 const inputElement = document.querySelector('.js-input');
 const btnSearchElement = document.querySelector('.js-btnSearch');
 const characterList = document.querySelector('.js-characterList');
-const favoriteList = document.querySelector('.js-favouriteList');
+const favoriteList = document.querySelector('.js-favoriteList');
+const btnResetFavourites = document.querySelector('.js-resetBtn');
+
 
 //variables Globales
 let allCharacters = [];
 let favCharacters = [];
-
+let userSearch = '';
+const urlApiAll ='https://breakingbadapi.com/api/characters';
 
 
 //Crear en Dom HTML
@@ -52,12 +55,6 @@ function renderCharacter (objetoCharacter, section){
   cardListener ();
 }
 
-let userSearch = '';
-const urlApiAll ='https://breakingbadapi.com/api/characters';
-/* let urlApName =`https://breakingbadapi.com/api/characters?name=${userSearch}`; */
-
-
-
 //Traernos la infomación de la API
 
 function fetchCharacters (url) {
@@ -67,21 +64,27 @@ function fetchCharacters (url) {
       allCharacters = jsonData;
       renderCharacter (allCharacters,characterList);
     });
-    }
+}
 
+//Recuperar información localStorage
+function renderLocalSotarge (){
+  if (savedFavourites !== null) {
+    favCharacters = savedFavourites;
+    renderCharacter (favCharacters,favoriteList);
+  }}
 
-
-//eventos
+//----EVENTOS----
 //-botón busqueda
 
 function handleClickSearch(event) {
   characterList.innerHTML='';
   event.preventDefault();
   userSearch = inputElement.value.toLowerCase();
-  const filterdCharacters = allCharacters.filter((eachCharacter) => eachCharacter.name.toLowerCase().includes(userSearch));
-
+  let filterdCharacters = allCharacters.filter((eachCharacter) => eachCharacter.name.toLowerCase().includes(userSearch));
+  if (userSearch===''){filterdCharacters=allCharacters;}
   renderCharacter (filterdCharacters,characterList);
 }
+
 //-evento en tarjetas selección y favoritos
 
 function cardListener () {
@@ -93,37 +96,42 @@ function cardListener () {
 
 function handleClickCard (event){
   const selected = event.currentTarget;
-  selected.classList.toggle('selected');
   const selectedId= parseInt(selected.id);
-  console.log(selectedId);
-
   const selectedCharacter = allCharacters.find((eachCharacter)=> eachCharacter.char_id=== selectedId);
-  console.log(selectedCharacter);
-
   const selectedCharacterIndex = favCharacters.findIndex((eachCharacter) => eachCharacter.char_id=== selectedId);
-  console.log(selectedCharacterIndex);
+
   if (selectedCharacterIndex === -1) {
     favCharacters.push(selectedCharacter);
-
+    selected.classList.add('selected');
   } else {
     favCharacters.splice(selectedCharacterIndex, 1);
+    selected.classList.remove('selected');
   }
-  console.log(favCharacters);
 
   localStorage.setItem('favoritesStorage', JSON.stringify(favCharacters));
   favoriteList.innerHTML='';
-
   renderCharacter (favCharacters,favoriteList);
-
 }
 
-//llamar a las funciones
+
+//-evento botón borrar favoritos
+function cleanFavorites () {
+  favCharacters = [];
+  favoriteList.innerHTML='';
+  localStorage.removeItem('favoritesStorage');
+  const articlesCharacters = characterList.querySelectorAll('.article');
+  for (const article of articlesCharacters) {
+    article.classList.remove('selected');
+  }
+  renderCharacter (allCharacters,characterList);
+}
+
+
+//----LLAMAR FUNCIONES---
+
 fetchCharacters (urlApiAll);
 btnSearchElement.addEventListener('click', handleClickSearch);
 const savedFavourites = JSON.parse(localStorage.getItem('favoritesStorage'));
-console.log(savedFavourites);
-if (savedFavourites !== null) {
-    favCharacters = savedFavourites;
-    renderCharacter (favCharacters,favoriteList);
-  }
+renderLocalSotarge ();
+btnResetFavourites.addEventListener('click', cleanFavorites);
 
