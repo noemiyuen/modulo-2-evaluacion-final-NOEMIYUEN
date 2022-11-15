@@ -68,6 +68,20 @@ function fetchCharacters (url) {
 
 //comparar tarjetas en Characters y en Favorites
 
+function compareFavorite (){
+  //-marcar elementos buscados como favoritos si estan en varitos
+  const artChAll = characterList.querySelectorAll('article');
+  //--Convert NodeList to array
+  const artChArray = Array.prototype.slice.call(artChAll);
+  for(const artCh of artChArray) {
+    const artid = parseInt(artCh.id);
+    for(const artFv of favCharacters) {
+      if(artid===artFv.char_id){
+        artCh.classList.add('selected');
+      }
+    }
+  }
+}
 
 
 //Recuperar información localStorage
@@ -77,17 +91,18 @@ function renderLocalSotarge (){
     renderCharacter (favCharacters,favoriteList);
   }}
 
+
 //----EVENTOS----
 //-botón busqueda
 
 function handleClickSearch(event) {
-  characterList.innerHTML='';
   event.preventDefault();
+  characterList.innerHTML='';
   userSearch = inputElement.value.toLowerCase();
   let filterdCharacters = allCharacters.filter((eachCharacter) => eachCharacter.name.toLowerCase().includes(userSearch));
   if (userSearch===''){filterdCharacters=allCharacters;}
   renderCharacter (filterdCharacters,characterList);
-
+  compareFavorite ();
 }
 
 //-evento en tarjetas selección y favoritos
@@ -139,4 +154,5 @@ btnSearchElement.addEventListener('click', handleClickSearch);
 const savedFavourites = JSON.parse(localStorage.getItem('favoritesStorage'));
 renderLocalSotarge ();
 btnResetFavourites.addEventListener('click', cleanFavorites);
+
 
