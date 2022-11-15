@@ -66,29 +66,7 @@ function fetchCharacters (url) {
 }
 
 
-
 //comparar tarjetas en Characters y en Favorites
-/* function isInFavorite (article, renderLocalSotarge){
-  for (const favArticle of favCharacters) {
-  if (favArticle.id === article.id) {
-    article.classList.add('selected');
-  }}} */
-
-
-
-
-/* function compareFavorite(){
-  const articlesCharacters = characterList.querySelectorAll('.article');
-  const articlesFavorites = favoriteList .querySelectorAll('.article');
-
-  for (const article of articlesCharacters) {
-    const articlesInFavoritesIndex = articlesFavorites.findIndex((eachArticle) => eachArticle.id === article.id);
-    if (!articlesInFavoritesIndex === -1) {
-      article.classList.add('selected');
-      return allCharacters;}
-  }
-}
- */
 
 
 
@@ -109,6 +87,7 @@ function handleClickSearch(event) {
   let filterdCharacters = allCharacters.filter((eachCharacter) => eachCharacter.name.toLowerCase().includes(userSearch));
   if (userSearch===''){filterdCharacters=allCharacters;}
   renderCharacter (filterdCharacters,characterList);
+
 }
 
 //-evento en tarjetas selección y favoritos
@@ -160,3 +139,4 @@ btnSearchElement.addEventListener('click', handleClickSearch);
 const savedFavourites = JSON.parse(localStorage.getItem('favoritesStorage'));
 renderLocalSotarge ();
 btnResetFavourites.addEventListener('click', cleanFavorites);
+
