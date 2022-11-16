@@ -7,7 +7,7 @@ const btnSearchElement = document.querySelector('.js-btnSearch');
 const characterList = document.querySelector('.js-characterList');
 const favoriteList = document.querySelector('.js-favoriteList');
 const btnResetFavourites = document.querySelector('.js-resetBtn');
-
+const logBtnElement = document.querySelector ('.js-logBtn');
 
 //variables Globales
 let allCharacters = [];
@@ -40,6 +40,10 @@ function renderCharacter (objetoCharacter, section){
     nameCh.classList.add('article__name');
     const nameText = document.createTextNode(character.name);
 
+    const category = document.createElement ('p');
+    const categoryText = document.createTextNode(character.category);
+    category.appendChild(categoryText);
+
     nameCh.appendChild(nameText);
     const statusCh = document.createElement ('p');
     statusCh.classList.add('article__status');
@@ -47,6 +51,7 @@ function renderCharacter (objetoCharacter, section){
     statusCh.appendChild(statusText);
     article.appendChild(imgCh);
     article.appendChild(nameCh);
+    article.appendChild(category);
     article.appendChild(statusCh);
     listElement.appendChild(article);
 
@@ -146,6 +151,14 @@ function cleanFavorites () {
   renderCharacter (allCharacters,characterList);
 }
 
+//--evento LOG
+
+function handleClickLog () {
+  for (const card of allCharacters) {
+    console.log(card.name);
+  }
+}
+
 
 //----LLAMAR FUNCIONES---
 
@@ -155,4 +168,4 @@ const savedFavourites = JSON.parse(localStorage.getItem('favoritesStorage'));
 renderLocalSotarge ();
 btnResetFavourites.addEventListener('click', cleanFavorites);
 
-
+logBtnElement.addEventListener('click', handleClickLog);
