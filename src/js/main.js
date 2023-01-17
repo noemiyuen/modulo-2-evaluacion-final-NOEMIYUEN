@@ -7,20 +7,20 @@ const btnSearchElement = document.querySelector('.js-btnSearch');
 const characterList = document.querySelector('.js-characterList');
 const favoriteList = document.querySelector('.js-favoriteList');
 const btnResetFavourites = document.querySelector('.js-resetBtn');
-const logBtnElement = document.querySelector ('.js-logBtn');
+/* const logBtnElement = document.querySelector('.js-logBtn'); */
 
 //variables Globales
 let allCharacters = [];
 let favCharacters = [];
 let userSearch = '';
-const urlApiAll ='https://breakingbadapi.com/api/characters';
-
+/* const urlApiAll ='https://breakingbadapi.com/api/characters'; */
+const urlApiAll = './assets/data/characters.json';
 
 //Crear en Dom HTML
-function renderCharacter (objetoCharacter, section){
-  section.innerHTml='';
+function renderCharacter(objetoCharacter, section) {
+  section.innerHTml = '';
 
-  for(const character of objetoCharacter) {
+  for (const character of objetoCharacter) {
     const listElement = document.createElement('li');
     listElement.classList.add('section__list--element');
 
@@ -33,19 +33,19 @@ function renderCharacter (objetoCharacter, section){
     const imgChcont = document.createElement('img');
     imgChcont.src = character.img;
     imgChcont.classList.add('article__imgBox--img');
-    imgChcont.dataset.alt=`foto de ${character.name} `;
+    imgChcont.dataset.alt = `foto de ${character.name} `;
     imgCh.appendChild(imgChcont);
 
     const nameCh = document.createElement('h3');
     nameCh.classList.add('article__name');
     const nameText = document.createTextNode(character.name);
 
-    const category = document.createElement ('p');
+    const category = document.createElement('p');
     const categoryText = document.createTextNode(character.category);
     category.appendChild(categoryText);
 
     nameCh.appendChild(nameText);
-    const statusCh = document.createElement ('p');
+    const statusCh = document.createElement('p');
     statusCh.classList.add('article__status');
     const statusText = document.createTextNode(character.status);
     statusCh.appendChild(statusText);
@@ -57,73 +57,79 @@ function renderCharacter (objetoCharacter, section){
 
     section.appendChild(listElement);
   }
-  cardListener ();
+  cardListener();
 }
 
 //Traernos la infomación de la API
-function fetchCharacters (url) {
+function fetchCharacters(url) {
   fetch(url)
-    .then((response)=>response.json())
-    .then((jsonData)=>{
+    .then((response) => response.json())
+    .then((jsonData) => {
       allCharacters = jsonData;
-      renderCharacter (allCharacters,characterList);
+      renderCharacter(allCharacters, characterList);
     });
 }
 
-
 //comparar tarjetas en Characters y en Favorites
 
-function compareFavorite (){
+function compareFavorite() {
   //-marcar elementos buscados como favoritos si estan en varitos
   const artChAll = characterList.querySelectorAll('article');
   //--Convert NodeList to array
   const artChArray = Array.prototype.slice.call(artChAll);
-  for(const artCh of artChArray) {
+  for (const artCh of artChArray) {
     const artid = parseInt(artCh.id);
-    for(const artFv of favCharacters) {
-      if(artid===artFv.char_id){
+    for (const artFv of favCharacters) {
+      if (artid === artFv.char_id) {
         artCh.classList.add('selected');
       }
     }
   }
 }
 
-
 //Recuperar información localStorage
-function renderLocalSotarge (){
+function renderLocalSotarge() {
   if (savedFavourites !== null) {
     favCharacters = savedFavourites;
-    renderCharacter (favCharacters,favoriteList);
-  }}
-
+    renderCharacter(favCharacters, favoriteList);
+  }
+}
 
 //----EVENTOS----
 //-botón busqueda
 
 function handleClickSearch(event) {
   event.preventDefault();
-  characterList.innerHTML='';
+  characterList.innerHTML = '';
   userSearch = inputElement.value.toLowerCase();
-  let filterdCharacters = allCharacters.filter((eachCharacter) => eachCharacter.name.toLowerCase().includes(userSearch));
-  if (userSearch===''){filterdCharacters=allCharacters;}
-  renderCharacter (filterdCharacters,characterList);
-  compareFavorite ();
+  let filterdCharacters = allCharacters.filter((eachCharacter) =>
+    eachCharacter.name.toLowerCase().includes(userSearch)
+  );
+  if (userSearch === '') {
+    filterdCharacters = allCharacters;
+  }
+  renderCharacter(filterdCharacters, characterList);
+  compareFavorite();
 }
 
 //-evento en tarjetas selección y favoritos
 
-function cardListener () {
+function cardListener() {
   const articlesElementAll = document.querySelectorAll('.article');
   for (const article of articlesElementAll) {
     article.addEventListener('click', handleClickCard);
   }
 }
 
-function handleClickCard (event){
+function handleClickCard(event) {
   const selected = event.currentTarget;
-  const selectedId= parseInt(selected.id);
-  const selectedCharacter = allCharacters.find((eachCharacter)=> eachCharacter.char_id=== selectedId);
-  const selectedCharacterIndex = favCharacters.findIndex((eachCharacter) => eachCharacter.char_id=== selectedId);
+  const selectedId = parseInt(selected.id);
+  const selectedCharacter = allCharacters.find(
+    (eachCharacter) => eachCharacter.char_id === selectedId
+  );
+  const selectedCharacterIndex = favCharacters.findIndex(
+    (eachCharacter) => eachCharacter.char_id === selectedId
+  );
 
   if (selectedCharacterIndex === -1) {
     favCharacters.push(selectedCharacter);
@@ -134,38 +140,36 @@ function handleClickCard (event){
   }
 
   localStorage.setItem('favoritesStorage', JSON.stringify(favCharacters));
-  favoriteList.innerHTML='';
-  renderCharacter (favCharacters,favoriteList);
+  favoriteList.innerHTML = '';
+  renderCharacter(favCharacters, favoriteList);
 }
 
-
 //-evento botón borrar favoritos
-function cleanFavorites () {
+function cleanFavorites() {
   favCharacters = [];
-  favoriteList.innerHTML='';
+  favoriteList.innerHTML = '';
   localStorage.removeItem('favoritesStorage');
   const articlesCharacters = characterList.querySelectorAll('.article');
   for (const article of articlesCharacters) {
     article.classList.remove('selected');
   }
-  renderCharacter (allCharacters,characterList);
+  renderCharacter(allCharacters, characterList);
 }
 
-//--evento LOG
+//--evento LOG--ejercicio extra-LOG
 
-function handleClickLog () {
+/* function handleClickLog() {
   for (const card of allCharacters) {
     console.log(card.name);
   }
-}
-
+} */
 
 //----LLAMAR FUNCIONES---
 
-fetchCharacters (urlApiAll);
+fetchCharacters(urlApiAll);
 btnSearchElement.addEventListener('click', handleClickSearch);
 const savedFavourites = JSON.parse(localStorage.getItem('favoritesStorage'));
-renderLocalSotarge ();
+renderLocalSotarge();
 btnResetFavourites.addEventListener('click', cleanFavorites);
 
-logBtnElement.addEventListener('click', handleClickLog);
+/* logBtnElement.addEventListener('click', handleClickLog); */

@@ -143,3 +143,7 @@ Haber resuelto las issues de la evaluación intermedia.
 
 - Usar inglés para nombres de variables, funciones, clases, mensajes de commit, nombres de ficheros.
   -El repositorio de GitHub debe tener README explicando muy brevemente cómo arrancar el proyecto.
+
+# Arrancar el proyecto
+
+Instalar las dependencias con el comando `npm intall` ya arrancar con el comando `npm start`.
